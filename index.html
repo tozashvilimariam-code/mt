@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniReserve — უნივერსალური პერსონალიზებული ჯავშნის პლატფორმა</title>
+  <meta name="description" content="დაჯავშნე ნებისმიერი სერვისი ერთ სივრცეში: სასტუმროები, რესტორნები, აუზები, კლინიკები, კაფეები და გასართობი ადგილები შენს პრეფერენციებზე მორგებით.">
+
+  <!-- Google Fonts: Noto Sans Georgian & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Background decorative light orbs -->
+  <div class="bg-mesh" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="navbar" id="main-nav">
+    <div class="container nav-content">
+      <a href="#hero" class="brand-logo" id="logo-btn">
+        <div class="logo-icon" title="OmniReserve — უნივერსალური ჯავშნის სისტემა">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Concierge Bell Knob -->
+            <circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/>
+            <rect x="15" y="7.5" width="2" height="2.5" rx="1" fill="currentColor" stroke="none"/>
+            <!-- Bell Dome -->
+            <path d="M6 21.5C6.5 15.5 10.8 11 16 11C21.2 11 25.5 15.5 26 21.5H6Z" stroke-width="2.2" fill="rgba(184, 133, 95, 0.12)"/>
+            <!-- Confirmed Booking Checkmark -->
+            <path d="M12 16.5L14.8 19.3L20 14" stroke-width="2.3" stroke="var(--color-primary)"/>
+            <!-- Base Stand -->
+            <rect x="4" y="23" width="24" height="2.6" rx="1.3" fill="currentColor" stroke="none"/>
+            <path d="M8 25.6V27.5M24 25.6V27.5" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="logo-text-group">
+          <span class="logo-text">Omni<span class="gradient-text">Reserve</span></span>
+          <span class="logo-subtext">UNIVERSAL BOOKING</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="nav-links" id="nav-menu">
+        <a href="#hero" class="nav-link active">მთავარი</a>
+        <a href="#about" class="nav-link">ჩვენ შესახებ</a>
+        <a href="#features" class="nav-link">უპირატესობები</a>
+        <a href="#catalog" class="nav-link">კატალოგი & ჯავშანი</a>
+        <a href="#persona-section" class="nav-link">პერსონალიზაცია</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="persona-toggle-btn" title="შეცვალე პერსონა">
+          <span class="persona-indicator" id="current-persona-icon">✨</span>
+          <span class="persona-label" id="current-persona-name">ჩემი პროფილი</span>
+        </button>
+        <a href="#catalog" class="btn btn-primary" id="nav-quick-book-btn">
+          <span>სწრაფი ჯავშანი</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="burger-btn" id="burger-menu-btn" aria-label="მენიუს გახსნა">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section" id="hero">
+      <div class="container hero-container">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>ინტელექტუალური უნივერსალური ჯავშნები</span>
+        </div>
+
+        <h1 class="hero-title">
+          დაჯავშნე ყველაფერი <br>
+          <span class="gradient-text">შენს გემოვნებასა და გრაფიკზე</span> მორგებით
+        </h1>
+
+        <p class="hero-subtitle">
+          სასტუმრო, რესტორანი, აუზი, ექიმის ვიზიტი, კაფე თუ გართობა — 
+          აღარ გჭირდება ათობით სხვადასხვა ზარი და აპლიკაცია. ერთი პლატფორმა, მყისიერი დადასტურება და შენზე მორგებული პერსონალური შეთავაზებები.
+        </p>
+
+        <!-- Dynamic Universal Search Bar -->
+        <div class="hero-search-card" id="hero-search-wrapper">
+          <div class="search-field">
+            <label for="search-category"><span class="field-icon">🏷️</span> სერვისის ტიპი</label>
+            <select id="search-category" class="custom-select">
+              <option value="all">ყველა კატეგორია</option>
+              <option value="hotel">🏨 სასტუმროები & კოტეჯები</option>
+              <option value="restaurant">🍽️ რესტორნები & ლაუნჯები</option>
+              <option value="pool">🏊‍♂️ აუზები & სპა ცენტრები</option>
+              <option value="clinic">🏥 კლინიკები & ექიმები</option>
+              <option value="cafe">☕ კაფეები & სამუშაო სივრცე</option>
+              <option value="entertainment">🎯 გართობა & აქტივობები</option>
+            </select>
+          </div>
+
+          <div class="search-field">
+            <label for="search-city"><span class="field-icon">📍</span> ლოკაცია</label>
+            <select id="search-city" class="custom-select">
+              <option value="all">სრული საქართველო</option>
+              <option value="თბილისი">თბილისი</option>
+              <option value="ბათუმი">ბათუმი</option>
+              <option value="ქუთაისი">ქუთაისი</option>
+              <option value="ყაზბეგი">ყაზბეგი</option>
+              <option value="ბორჯომი">ბორჯომი</option>
+              <option value="კახეთი">კახეთი</option>
+            </select>
+          </div>
+
+          <div class="search-field">
+            <label for="search-date"><span class="field-icon">📅</span> სასურველი თარიღი</label>
+            <input type="date" id="search-date" class="custom-input">
+          </div>
+
+          <div class="search-field">
+            <label for="search-guests"><span class="field-icon">👥</span> სტუმრები</label>
+            <select id="search-guests" class="custom-select">
+              <option value="1">1 პერსონა</option>
+              <option value="2" selected>2 პერსონა</option>
+              <option value="3-4">3-4 პერსონა</option>
+              <option value="5+">5+ პერსონა / ჯგუფი</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary search-submit-btn" id="hero-search-action">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <span>ძიება</span>
+          </button>
+        </div>
+
+        <!-- Hero Stats Banner -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-number">1,800+</span>
+            <span class="stat-label">შემოწმებული ობიექტი</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">99.4%</span>
+            <span class="stat-label">მყისიერი დასტური</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">45,000+</span>
+            <span class="stat-label">კმაყოფილი მომხმარებელი</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">0 ₾</span>
+            <span class="stat-label">საკომისიო ჯავშანზე</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">ჩვენ შესახებ</span>
+          <h2 class="section-title">რატომ შევქმენით <span class="gradient-text">OmniReserve?</span></h2>
+          <p class="section-subtitle">
+            ჯავშნის პროცესი საქართველოში ხშირად გადაქცეულია დამღლელ სატელეფონო ზარებად, მოუწესრიგებელ ჩატებად და გაუგებარ პირობებად. 
+            ჩვენ შევქმენით ერთიანი ციფრული ეკოსისტემა, რომელიც პატივს სცემს თქვენს დროს.
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <div class="about-card highlight-card">
+            <div class="about-icon-box">🎯</div>
+            <h3>ინდივიდუალური მიდგომა</h3>
+            <p>
+              სისტემა იმახსოვრებს თქვენს გემოვნებას — გირჩევთ თუ არა მშვიდ მაგიდას ფანჯარასთან, სპორტულ აუზს დილის საათებში, თუ სასურველი სპეციალისტის თავისუფალ დროს კლინიკაში.
+            </p>
+            <div class="card-glow"></div>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon-box">⚡</div>
+            <h3>მყისიერი დადასტურება</h3>
+            <p>
+              არანაირი „დაგირეკავთ და გადავამოწმებთ“. ჯავშანი მომენტალურად ისახება ობიექტის ბაზაში და თქვენ იღებთ ციფრულ ვაუჩერს QR კოდითა და SMS შეტყობინებით.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon-box">🛡️</div>
+            <h3>გარანტირებული ადგილი</h3>
+            <p>
+              ყველა პარტნიორი ობიექტი ხელშეკრულებით უზრუნველყოფს თქვენი დროისა და პირობების მკაცრ დაცვას. გაუქმება ან გადატანა კი შესაძლებელია 1 კლიკით.
+            </p>
+          </div>
+
+          <div class="about-card">
+            <div class="about-icon-box">💎</div>
+            <h3>ლოიალობის სისტემა</h3>
+            <p>
+              ყოველ ჯავშანზე აგროვებთ ქულებს, რომლებსაც გამოიყენებთ სასტუმროებში, რესტორნებსა და სპა ცენტრებში რეალური ფასდაკლების სახით.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Banner -->
+        <div class="experience-banner">
+          <div class="banner-col old-way">
+            <h4>❌ ძველი გზა</h4>
+            <ul>
+              <li>ზარები 5 სხვადასხვა ადგილას</li>
+              <li>დალოდება პასუხზე: „შევამოწმებ და მოგწერთ“</li>
+              <li>გაუქმებისას პრობლემები და ჩხუბი</li>
+              <li>არანაირი პერსონალიზაცია</li>
+            </ul>
+          </div>
+          <div class="banner-vs">VS</div>
+          <div class="banner-col new-way">
+            <h4>✨ OmniReserve-ის გზა</h4>
+            <ul>
+              <li>ყველა კატეგორია 1 ეკრანზე</li>
+              <li>რეალურ დროში განახლებადი კალენდარი</li>
+              <li>მყისიერი SMS & QR დასტური</li>
+              <li>შენზე მორგებული ფასები და დროები</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">შესაძლებლობები</span>
+          <h2 class="section-title">ინოვაციური ფუნქციები <br><span class="gradient-text">იდეალური კომფორტისთვის</span></h2>
+          <p class="section-subtitle">
+            ტექნოლოგიები, რომლებიც თქვენს ყოველდღიურ გეგმებსა და დასვენებას ხდის სრულიად უდარდელს
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Feature 1 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3>სრულიად გამჭვირვალე ფასები</h3>
+            <p>არავითარი ფარული გადასახადი ან მომსახურების დამატებითი პროცენტი. იხდით ზუსტად იმას, რასაც ხედავთ.</p>
+            <span class="feature-badge">0% საკომისიო</span>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            </div>
+            <h3>კალენდრის ინტეგრაცია</h3>
+            <p>ჯავშანი ავტომატურად სინქრონიზდება Apple Calendar, Google Calendar და Outlook-თან შეხსენებების ფუნქციით.</p>
+            <span class="feature-badge">Smart Sync</span>
+          </div>
+
+          <!-- Feature 3 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+            <h3>ჯგუფური ჯავშანი & ხარჯის გაყოფა</h3>
+            <p>გეგმავთ მეგობრებთან ერთად გასვლას? გააგზავნეთ ჯგუფური ბმული და გაიყავით ხარჯი მარტივად აპლიკაციაშივე.</p>
+            <span class="feature-badge">Split Bill</span>
+          </div>
+
+          <!-- Feature 4 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3>ვერიფიცირებული რეიტინგები</h3>
+            <p>შეფასებებს წერენ მხოლოდ ის მომხმარებლები, რომლებმაც რეალურად ისარგებლეს ჯავშნით. 100% რეალური აზრი.</p>
+            <span class="feature-badge">Verified Reviews</span>
+          </div>
+
+          <!-- Feature 5 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+            </div>
+            <h3>ჭკვიანი შეხსენებები</h3>
+            <p>მიიღეთ შეხსენება ვიზიტამდე 24 და 2 საათით ადრე, რუკის ზუსტი ლოკაციითა და პარკინგის დეტალებით.</p>
+            <span class="feature-badge">AI Assistant</span>
+          </div>
+
+          <!-- Feature 6 -->
+          <div class="feature-box">
+            <div class="feature-icon-wrapper">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            </div>
+            <h3>მოქნილი გაუქმება</h3>
+            <p>გეგმები შეიცვალა? გააუქმეთ ან გადაიტანეთ ვიზიტი საჯარიმო სანქციების გარეშე დაწესებული წესების ფარგლებში.</p>
+            <span class="feature-badge">Free Cancel</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PERSONA CUSTOMIZATION STRIP -->
+    <section class="persona-section" id="persona-section">
+      <div class="container">
+        <div class="persona-card-wrapper">
+          <div class="persona-info">
+            <span class="section-tag">პერსონალიზაციის რეჟიმი</span>
+            <h2>აირჩიე შენი დღევანდელი განწყობა</h2>
+            <p>მოარგე კატალოგი შენს მიზნებს ერთი დაწკაპუნებით:</p>
+          </div>
+          <div class="persona-chips" id="persona-chips">
+            <button class="persona-chip active" data-persona="all">
+              <span>🌐</span> სრული კატალოგი
+            </button>
+            <button class="persona-chip" data-persona="relax">
+              <span>🧖‍♂️</span> რელაქსი & ველნესი
+            </button>
+            <button class="persona-chip" data-persona="business">
+              <span>💼</span> ბიზნესი & სამუშაო
+            </button>
+            <button class="persona-chip" data-persona="romantic">
+              <span>🕯️</span> რომანტიკა & წყვილები
+            </button>
+            <button class="persona-chip" data-persona="fun">
+              <span>🎉</span> გართობა & მეგობრები
+            </button>
+            <button class="persona-chip" data-persona="health">
+              <span>🩺</span> ჯანმრთელობა
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT & CATALOG SECTION -->
+    <section class="catalog-section" id="catalog">
+      <div class="container">
+        <div class="catalog-header-row">
+          <div>
+            <span class="section-tag">სერვისების კატალოგი</span>
+            <h2 class="section-title">აღმოაჩინე და <span class="gradient-text">დაჯავშნე მარტივად</span></h2>
+          </div>
+          <div class="catalog-counter" id="catalog-count-badge">
+            ნაჩვენებია: <strong id="shown-count">12</strong> ობიექტი
+          </div>
+        </div>
+
+        <!-- Interactive Drag Instruction Banner -->
+        <div class="drag-instruction-banner">
+          <div class="drag-instruction-content">
+            <span class="drag-icon-anim">↔️</span>
+            <div>
+              <div class="drag-text-title">მაუსით გადათრევის (Mouse Drag) ფუნქცია აქტიურია</div>
+              <div class="drag-text-desc">გადაათრიეთ მაუსი მარცხნივ ან მარჯვნივ ნებისმიერ ბარათზე სრული დეტალური ინფორმაციის გასახსნელად</div>
+            </div>
+          </div>
+          <span class="drag-badge-pill">ინტერაქტიული დეტალები</span>
+        </div>
+
+        <!-- Filter Category Tabs -->
+        <div class="category-filters-container">
+          <div class="category-tabs" id="category-tabs">
+            <button class="cat-tab active" data-cat="all">
+              <span class="tab-emoji">✨</span> ყველა
+            </button>
+            <button class="cat-tab" data-cat="pool">
+              <span class="tab-emoji">🏊‍♂️</span> აუზი & სპა
+            </button>
+            <button class="cat-tab" data-cat="clinic">
+              <span class="tab-emoji">🏥</span> კლინიკა & ექიმი
+            </button>
+            <button class="cat-tab" data-cat="hotel">
+              <span class="tab-emoji">🏨</span> სასტუმრო & კოტეჯი
+            </button>
+            <button class="cat-tab" data-cat="restaurant">
+              <span class="tab-emoji">🍽️</span> რესტორანი
+            </button>
+            <button class="cat-tab" data-cat="cafe">
+              <span class="tab-emoji">☕</span> კაფე & ბრანჩი
+            </button>
+            <button class="cat-tab" data-cat="entertainment">
+              <span class="tab-emoji">🎯</span> გართობა & აქტივობა
+            </button>
+          </div>
+        </div>
+
+        <!-- Dynamic Catalog Grid -->
+        <div class="catalog-grid" id="catalog-grid">
+          <!-- Rendered via JavaScript with Drag to Reveal -->
+        </div>
+
+        <!-- Empty state fallback -->
+        <div class="empty-state hidden" id="empty-state">
+          <div class="empty-icon">🔍</div>
+          <h3>მითითებული პარამეტრებით ობიექტი ვერ მოიძებნა</h3>
+          <p>სცადეთ ფილტრების გასუფთავება ან სხვა ქალაქისა და კატეგორიის არჩევა.</p>
+          <button class="btn btn-secondary" id="reset-filters-btn">ფილტრების გასუფთავება</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE USER REVIEWS / SOCIAL PROOF -->
+    <section class="reviews-section">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">გამოხმაურებები</span>
+          <h2 class="section-title">რას ამბობენ <span class="gradient-text">ჩვენი მომხმარებლები</span></h2>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">„კლინიკაში ექიმთან ვიზიტის დაჯავშნა და იმავე დღეს საღამოს რესტორნის მაგიდის დაჯავშნა ერთ აპლიკაციაში მოვახერხე. უმარტივესია და არანაირი სატელეფონო ლოდინი!“</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">ნკ</div>
+              <div>
+                <strong>ნინო კობახიძე</strong>
+                <span>თბილისი • კლინიკა & რესტორანი</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">„ოლიმპიური აუზის ჯავშანი ავიღე 30 წამში, ადგილზე მისვლისას პირდაპირ QR კოდი დავასკანერე. საუკეთესო სერვისია რაც კი ბოლო დროს გამოსულა საქართველოში.“</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">დმ</div>
+              <div>
+                <strong>დავით მახარაძე</strong>
+                <span>ბათუმი • აუზი & სპა</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">„ყაზბეგში კოტეჯი და ბოულინგის დარბაზი მეგობრებისთვის დავჯავშნე ერთად. გადახდის გაყოფის ფუნქციამ საერთოდ გაგვიმარტივა საქმე!“</p>
+            <div class="reviewer-meta">
+              <div class="reviewer-avatar">სბ</div>
+              <div>
+                <strong>სალომე ბერიძე</strong>
+                <span>თბილისი • სასტუმრო & გართობა</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BANNER -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-box">
+          <div class="cta-content">
+            <h2>მზად ხარ დაზოგო დრო და ნერვები?</h2>
+            <p>შეუერთდი 45,000+ მომხმარებელს და დაჯავშნე საუკეთესო ადგილები ურიგოდ და გარანტიით.</p>
+            <div class="cta-actions">
+              <a href="#catalog" class="btn btn-primary btn-lg">დაიწყე ჯავშანი ახლავე</a>
+              <button class="btn btn-secondary btn-lg" id="partner-btn">გახდი პარტნიორი ობიექტი</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="16" cy="6" r="2" fill="currentColor" stroke="none"/>
+              <rect x="15" y="7.5" width="2" height="2.5" rx="1" fill="currentColor" stroke="none"/>
+              <path d="M6 21.5C6.5 15.5 10.8 11 16 11C21.2 11 25.5 15.5 26 21.5H6Z" stroke-width="2.2" fill="rgba(184, 133, 95, 0.12)"/>
+              <path d="M12 16.5L14.8 19.3L20 14" stroke-width="2.3" stroke="var(--color-primary)"/>
+              <rect x="4" y="23" width="24" height="2.6" rx="1.3" fill="currentColor" stroke="none"/>
+              <path d="M8 25.6V27.5M24 25.6V27.5" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="logo-text-group">
+            <span class="logo-text">Omni<span class="gradient-text">Reserve</span></span>
+            <span class="logo-subtext">UNIVERSAL BOOKING</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          უნივერსალური პერსონალიზებული ჯავშნის პლატფორმა საქართველოში. სასტუმროები, რესტორნები, აუზები, კლინიკები და გართობა ერთ სივრცეში.
+        </p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Facebook">FB</a>
+          <a href="#" class="social-link" aria-label="Instagram">IG</a>
+          <a href="#" class="social-link" aria-label="LinkedIn">IN</a>
+          <a href="#" class="social-link" aria-label="Telegram">TG</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>სერვისები</h4>
+        <ul>
+          <li><a href="#catalog" data-footer-cat="pool">აუზები & სპა</a></li>
+          <li><a href="#catalog" data-footer-cat="clinic">კლინიკები & ექიმები</a></li>
+          <li><a href="#catalog" data-footer-cat="hotel">სასტუმროები & კოტეჯები</a></li>
+          <li><a href="#catalog" data-footer-cat="restaurant">რესტორნები & ბარები</a></li>
+          <li><a href="#catalog" data-footer-cat="entertainment">გასართობი ცენტრები</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>კომპანია</h4>
+        <ul>
+          <li><a href="#about">ჩვენ შესახებ</a></li>
+          <li><a href="#features">უპირატესობები</a></li>
+          <li><a href="#persona-section">პერსონალიზაცია</a></li>
+          <li><a href="#">კარიერა</a></li>
+          <li><a href="#">პარტნიორობა</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>კონტაქტი & დახმარება</h4>
+        <ul class="contact-list">
+          <li>📍 ჭავჭავაძის გამზ. 37, თბილისი</li>
+          <li>📞 +995 (32) 200 40 40</li>
+          <li>✉️ support@omnireserve.ge</li>
+          <li>⏰ 24/7 მომხმარებელთა მხარდაჭერა</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p>© 2026 OmniReserve Georgia. ყველა უფლება დაცულია.</p>
+        <div class="bottom-links">
+          <a href="#">კონფიდენციალურობა</a>
+          <a href="#">წესები და პირობები</a>
+          <a href="#">უსაფრთხოება</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- DRAGGABLE BOTTOM SHEET / VENUE DETAIL INSPECTOR -->
+  <div class="draggable-sheet-backdrop hidden" id="draggable-detail-sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-venue-title">
+    <div class="draggable-bottom-sheet" id="sheet-card">
+      <div class="sheet-drag-handle-bar" id="sheet-drag-handle">
+        <div class="sheet-handle-pill"></div>
+        <span class="sheet-handle-label">↔️ გადაათრიე დასახურად ან დააკლიკე</span>
+      </div>
+      <div class="sheet-content-scroll">
+        <div class="sheet-header-top">
+          <div>
+            <span class="modal-cat-badge" id="sheet-cat-badge">კატეგორია</span>
+            <h3 class="sheet-venue-title" id="sheet-venue-title">ობიექტის სახელი</h3>
+            <p class="sheet-venue-loc" id="sheet-venue-loc">📍 თბილისი</p>
+          </div>
+          <button class="modal-close-btn" id="sheet-close-btn" aria-label="დახურვა">✕</button>
+        </div>
+
+        <p id="sheet-venue-desc" style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;"></p>
+
+        <!-- Dynamic Specs Grid -->
+        <div class="sheet-specs-grid">
+          <div class="sheet-spec-card">
+            <strong>🕒 სამუშაო საათები</strong>
+            <p id="sheet-spec-hours">-</p>
+          </div>
+          <div class="sheet-spec-card">
+            <strong>📍 ზუსტი მისამართი</strong>
+            <p id="sheet-spec-address">-</p>
+          </div>
+          <div class="sheet-spec-card" style="grid-column: span 2;">
+            <strong>✨ სპეციფიკაციები & ჰიგიენა</strong>
+            <p id="sheet-spec-details">-</p>
+          </div>
+        </div>
+
+        <div>
+          <strong style="display:block; font-size: 0.82rem; text-transform: uppercase; color: var(--color-beige-dark); margin-bottom: 0.6rem;">სრული სერვისები & კომფორტი</strong>
+          <div class="detail-amenities-list" id="sheet-amenities-container">
+            <!-- Amenities chips -->
+          </div>
+        </div>
+
+        <div class="sheet-footer-action">
+          <div class="venue-price-box">
+            <span class="price-sub">ჯავშნის საფასური</span>
+            <div class="price-main">
+              <span class="price-currency">₾</span><span id="sheet-price-val">0</span> <span class="price-sub" id="sheet-price-label"></span>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-lg" id="sheet-book-now-btn">
+            სწრაფი ჯავშანი ✨
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTERACTIVE BOOKING MODAL -->
+  <div class="modal-backdrop hidden" id="booking-modal" role="dialog" aria-modal="true" aria-labelledby="modal-venue-title">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="დახურვა">✕</button>
+
+      <div class="modal-header">
+        <span class="modal-cat-badge" id="modal-cat-badge">კატეგორია</span>
+        <h3 id="modal-venue-title">დაჯავშნეთ ვიზიტი</h3>
+        <p class="modal-location" id="modal-venue-location">📍 ლოკაცია</p>
+      </div>
+
+      <!-- Step Progress Bar -->
+      <div class="modal-steps-indicator">
+        <div class="step-dot active" data-step-indicator="1">1. დრო & თარიღი</div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step-indicator="2">2. მონაცემები</div>
+        <div class="step-line"></div>
+        <div class="step-dot" data-step-indicator="3">3. დასტური</div>
+      </div>
+
+      <form id="booking-form" class="modal-form">
+        <!-- STEP 1: Date, Time slot, Persons -->
+        <div class="modal-step-panel active" id="modal-step-1">
+          <div class="form-group">
+            <label for="modal-date">თარიღის არჩევა</label>
+            <input type="date" id="modal-date" class="custom-input" required>
+          </div>
+
+          <div class="form-group">
+            <label>ხელმისაწვდომი დროის სლოტი</label>
+            <div class="time-slots-grid" id="modal-time-slots">
+              <button type="button" class="time-slot-btn active" data-slot="10:00">10:00</button>
+              <button type="button" class="time-slot-btn" data-slot="12:00">12:00</button>
+              <button type="button" class="time-slot-btn" data-slot="14:30">14:30</button>
+              <button type="button" class="time-slot-btn" data-slot="16:00">16:00</button>
+              <button type="button" class="time-slot-btn" data-slot="18:00">18:00</button>
+              <button type="button" class="time-slot-btn" data-slot="20:00">20:00</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-persons">სტუმრების / პერსონების რაოდენობა</label>
+            <div class="stepper-box">
+              <button type="button" class="stepper-btn" id="stepper-minus">-</button>
+              <span id="stepper-value" class="stepper-number">2</span>
+              <button type="button" class="stepper-btn" id="stepper-plus">+</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-service-variant" id="modal-service-variant-label">სერვისის პაკეტი</label>
+            <select id="modal-service-variant" class="custom-select">
+              <option value="standard">სტანდარტული ვიზიტი / ჯავშანი</option>
+              <option value="vip">VIP / გაუმჯობესებული პაკეტი (+25%)</option>
+              <option value="group">ჯგუფური პაკეტი (ფასდაკლებით)</option>
+            </select>
+          </div>
+
+          <div class="modal-footer">
+            <div class="price-estimate">
+              <span class="price-label">სავარაუდო ღირებულება:</span>
+              <span class="price-val" id="modal-estimated-price">₾ 60.00</span>
+            </div>
+            <button type="button" class="btn btn-primary" id="step-1-next-btn">გაგრძელება</button>
+          </div>
+        </div>
+
+        <!-- STEP 2: Personal details -->
+        <div class="modal-step-panel" id="modal-step-2">
+          <div class="form-group">
+            <label for="modal-client-name">სახელი და გვარი *</label>
+            <input type="text" id="modal-client-name" class="custom-input" placeholder="მაგ: გიორგი ბერიძე" required>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-client-phone">ტელეფონის ნომერი (SMS დასტურისთვის) *</label>
+            <input type="tel" id="modal-client-phone" class="custom-input" placeholder="+995 5XX XX XX XX" required>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-client-email">ელ-ფოსტა (ვაუჩერისთვის) *</label>
+            <input type="email" id="modal-client-email" class="custom-input" placeholder="name@example.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="modal-client-notes">სპეციალური მოთხოვნა / კომენტარი (სურვილისამებრ)</label>
+            <textarea id="modal-client-notes" class="custom-input textarea" rows="2" placeholder="მაგ. მაგიდა ტერასაზე, ალერგია, ბავშვის სკამი..."></textarea>
+          </div>
+
+          <div class="modal-footer step-2-footer">
+            <button type="button" class="btn btn-secondary" id="step-2-back-btn">უკან</button>
+            <button type="submit" class="btn btn-primary" id="confirm-booking-btn">ჯავშნის დადასტურება ✨</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Success Voucher Screen -->
+        <div class="modal-step-panel" id="modal-step-3">
+          <div class="success-voucher">
+            <div class="success-icon-badge">✓</div>
+            <h3>ჯავშანი წარმატებით დადასტურდა!</h3>
+            <p class="success-sub">SMS და ელ-ფოსტის შეტყობინება გამოგზავნილია თქვენს ნომერზე.</p>
+
+            <div class="voucher-ticket">
+              <div class="ticket-header">
+                <div>
+                  <span class="ticket-tag">OmniReserve Pass</span>
+                  <h4 id="voucher-venue-name">ობიექტი</h4>
+                </div>
+                <div class="ticket-booking-id">
+                  <span>ჯავშნის კოდი</span>
+                  <strong id="voucher-booking-code">#RES-8942</strong>
+                </div>
+              </div>
+
+              <div class="ticket-body">
+                <div class="ticket-info-row">
+                  <div>
+                    <span>სტუმარი</span>
+                    <strong id="voucher-guest-name">-</strong>
+                  </div>
+                  <div>
+                    <span>თარიღი & დრო</span>
+                    <strong id="voucher-datetime">-</strong>
+                  </div>
+                  <div>
+                    <span>პერსონა</span>
+                    <strong id="voucher-persons">-</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="ticket-qr-section">
+                <div class="qr-mockup">
+                  <svg width="80" height="80" viewBox="0 0 100 100" fill="currentColor">
+                    <rect x="10" y="10" width="25" height="25" fill="#1e1b4b"/>
+                    <rect x="15" y="15" width="15" height="15" fill="#ffffff"/>
+                    <rect x="18" y="18" width="9" height="9" fill="#1e1b4b"/>
+                    
+                    <rect x="65" y="10" width="25" height="25" fill="#1e1b4b"/>
+                    <rect x="70" y="15" width="15" height="15" fill="#ffffff"/>
+                    <rect x="73" y="18" width="9" height="9" fill="#1e1b4b"/>
+                    
+                    <rect x="10" y="65" width="25" height="25" fill="#1e1b4b"/>
+                    <rect x="15" y="70" width="15" height="15" fill="#ffffff"/>
+                    <rect x="18" y="73" width="9" height="9" fill="#1e1b4b"/>
+                    
+                    <rect x="42" y="15" width="8" height="20" fill="#1e1b4b"/>
+                    <rect x="40" y="45" width="20" height="10" fill="#1e1b4b"/>
+                    <rect x="65" y="65" width="25" height="25" fill="#1e1b4b"/>
+                    <rect x="45" y="65" width="10" height="20" fill="#1e1b4b"/>
+                  </svg>
+                </div>
+                <div class="qr-desc">
+                  <span>წარადგინეთ ეს QR კოდი ადგილზე მისვლისას ურიგოდ შესასვლელად.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer success-footer">
+              <button type="button" class="btn btn-secondary" id="save-calendar-btn">📅 კალენდარში დამატება</button>
+              <button type="button" class="btn btn-primary" id="finish-modal-btn">დასრულება</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="app.js"></script>
+</body>
+</html>
